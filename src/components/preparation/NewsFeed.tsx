@@ -19,10 +19,10 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ news }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <Card className="h-full">
+    <div className="h-auto bg-white shadow-sm">
       <CardHeader className="pb-2 flex flex-row items-center justify-between">
-        <CardTitle className="text-lg">Newsfeed</CardTitle>
-        <button 
+        <CardTitle className="text-lg text-[#1B1D64]">Newsfeed</CardTitle>
+        <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-gray-500 hover:text-gray-900"
         >
@@ -38,16 +38,16 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ news }) => {
           <div className="space-y-4">
             {news.map((item) => (
               <div key={item.id} className="border-b border-gray-200 pb-3 last:border-0 last:pb-0">
-                <h4 className="font-medium text-sm mb-1">{item.title}</h4>
-                <p className="text-sm text-gray-600 mb-1">{item.summary}</p>
+                <h4 className="font-medium text-[#1B1D64] text-sm mb-1 font-[400]">{item.title}</h4>
+                <p className="text-sm text-[#1B1D64] mb-1 font-[300]">{item.summary}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500">{item.date}</span>
+                  <span className="text-xs text-[#1B1D64] font-[400]">{item.date}</span>
                   {item.url && (
-                    <a 
-                      href={item.url} 
-                      target="_blank" 
+                    <a
+                      href={item.url}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-amlin-blue hover:underline"
+                      className="text-xs text-[#1B1D64] text-amlin-blue hover:underline font-[400]"
                     >
                       Read more
                     </a>
@@ -58,7 +58,7 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ news }) => {
           </div>
         )}
       </CardContent>
-    </Card>
+    </div>
   );
 };
 

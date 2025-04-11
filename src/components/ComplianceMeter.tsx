@@ -1,6 +1,7 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { Card } from './ui/card';
+import meterImage from '../img/Info-meter.png';
 
 interface ComplianceMeterProps {
   value: number; // 0-100
@@ -9,8 +10,8 @@ interface ComplianceMeterProps {
   className?: string;
 }
 
-const ComplianceMeter: React.FC<ComplianceMeterProps> = ({ 
-  value, 
+const ComplianceMeter: React.FC<ComplianceMeterProps> = ({
+  value,
   showAlert = false,
   size = 'md',
   className
@@ -22,7 +23,7 @@ const ComplianceMeter: React.FC<ComplianceMeterProps> = ({
   };
 
   const getComplianceText = (value: number) => {
-    if (value < 33) return 'Non-compliance detected';
+    if (value < 33) return 'Non-compliance detected. Immediate action needed, topic will be prioritized during conversation.';
     if (value < 66) return 'Partial compliance';
     return 'Fully compliant';
   };
@@ -38,68 +39,26 @@ const ComplianceMeter: React.FC<ComplianceMeterProps> = ({
   const { width, height, thickness } = getSizeDimensions(size);
   const complianceClass = getComplianceColor(value);
   const complianceText = getComplianceText(value);
-  
+
   // Calculate the angle for the needle
   const needleAngle = -90 + (value / 100 * 180);
-  
+
   return (
-    <div className={cn("flex flex-col items-center", className)}>
-      <div className="text-center mb-1 font-semibold text-gray-700">COMPLIANCE METER</div>
-      <div className="relative" style={{ width: `${width}px`, height: `${height}px` }}>
+    <div className="bg-white shadow-sm h-full pt-4" style={{ display: 'flex', flexFlow: 'column', alignItems: 'center' }}>
+      <div className="relative" style={{ width: `${width + 60}px`, height: `auto` }}>
         {/* Background arc */}
-        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-          <defs>
-            <linearGradient id="complianceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ff4d4f" />
-              <stop offset="50%" stopColor="#faad14" />
-              <stop offset="100%" stopColor="#52c41a" />
-            </linearGradient>
-          </defs>
-          
-          {/* Semicircle background */}
-          <path 
-            d={`M ${thickness/2} ${height - thickness/2} 
-                A ${width/2 - thickness/2} ${height - thickness/2} 0 0 1 ${width - thickness/2} ${height - thickness/2}`}
-            fill="none"
-            stroke="url(#complianceGradient)"
-            strokeWidth={thickness}
-            strokeLinecap="round"
-          />
-          
-          {/* Needle */}
-          <line
-            x1={width / 2}
-            y1={height - thickness}
-            x2={width / 2 + (width / 2 - thickness) * Math.cos(needleAngle * Math.PI / 180)}
-            y2={height - thickness - (height - thickness) * Math.sin(needleAngle * Math.PI / 180)}
-            stroke="#333"
-            strokeWidth={thickness / 4}
-            strokeLinecap="round"
-          />
-          
-          {/* Center circle */}
-          <circle
-            cx={width / 2}
-            cy={height - thickness}
-            r={thickness / 2}
-            fill="#333"
-          />
-        </svg>
+        <img src={meterImage} alt="Compliance Meter" />
       </div>
-      
+      <div className="text-left mb-1 font-semibold text-[#1B1464] pt-8 pl-4 pr-4 w-full">COMPLIANCE METER</div>
+
       <div className={cn(
-        "text-sm font-medium mt-2 text-center",
-        {
-          'text-compliance-red': complianceClass === 'compliance-red',
-          'text-compliance-yellow': complianceClass === 'compliance-yellow',
-          'text-compliance-green': complianceClass === 'compliance-green'
-        }
+        "text-m font-light mt-2 text-left pl-4 pr-2 w-full text-[#1B1464]" ,
       )}>
         {complianceText}
       </div>
-      
+
       {showAlert && complianceClass === 'compliance-red' && (
-        <div className="text-xs text-compliance-red mt-1 text-center">
+        <div className="text-xs text-[#1B1464] mt-1 text-center">
           Immediate action needed, topic will be prioritized during conversation.
         </div>
       )}

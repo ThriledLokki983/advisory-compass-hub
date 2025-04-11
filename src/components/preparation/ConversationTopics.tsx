@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import './ConversationTopics.css';
 
 interface Topic {
   id: string;
@@ -11,21 +11,27 @@ interface Topic {
 }
 
 interface ConversationTopicsProps {
-  topics: Topic[];
+  topics: {
+    id: string;
+    title: string;
+    selected: boolean;
+  }[];
   onTopicChange: (id: string, selected: boolean) => void;
+  onAddTopic: (title: string) => void;
 }
 
-const ConversationTopics: React.FC<ConversationTopicsProps> = ({ 
-  topics, 
-  onTopicChange 
+const ConversationTopics: React.FC<ConversationTopicsProps> = ({
+  topics,
+  onTopicChange,
+  onAddTopic
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <Card className="h-full">
-      <CardHeader className="pb-2 flex flex-row items-center justify-between">
-        <CardTitle className="text-lg">Conversation topics</CardTitle>
-        <button 
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>Conversation topics</CardTitle>
+        <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-gray-500 hover:text-gray-900"
         >
@@ -38,25 +44,15 @@ const ConversationTopics: React.FC<ConversationTopicsProps> = ({
       </CardHeader>
       <CardContent>
         {isExpanded && (
-          <div className="space-y-2">
+          <div className="topics-list">
             {topics.map((topic) => (
-              <div 
-                key={topic.id} 
-                className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-50"
+              <div
+                key={topic.id}
+                className="topic-item"
+                onClick={() => onTopicChange(topic.id, !topic.selected)}
               >
-                <Checkbox 
-                  id={`topic-${topic.id}`}
-                  checked={topic.selected}
-                  onCheckedChange={(checked) => 
-                    onTopicChange(topic.id, checked === true)
-                  }
-                />
-                <label 
-                  htmlFor={`topic-${topic.id}`}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-                >
-                  {topic.title}
-                </label>
+                <div className={`topic-dot ${topic.selected ? 'selected' : ''}`} />
+                <span className="topic-label">{topic.title}</span>
               </div>
             ))}
           </div>

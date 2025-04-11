@@ -1,0 +1,50 @@
+.company-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.details-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.details-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1B1464;
+  text-transform: uppercase;
+}
+
+.details-value {
+  font-size: 16px;
+  font-weight: 300;
+  color: #1B1464;
+}
+
+.mutations-list {
+  margin-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.mutations-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1B1464;
+  margin-bottom: 0.5rem;
+}
+
+.mutation-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mutation-item:last-child {
+  border-bottom: none;
+}

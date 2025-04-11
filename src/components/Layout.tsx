@@ -58,7 +58,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Button>
           </div>
         </div>
-        
+
         <div className="md:hidden container mx-auto px-4 pb-2">
           <div className="flex space-x-2 overflow-x-auto">
             {tabs.map((tab) => (
@@ -75,7 +75,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
       </header>
-      <main className="container mx-auto px-4 py-6">
+      {/* only show this at the preparation page */}
+      {activeTab === '/' && (
+        <div className="p-4 shadow-sm bg-white border-t border-gray-200">
+          <div className="container mx-auto px-4 flex justify-end">
+            <button className="bg-[#E11F27] text-white px-8 py-2 rounded-full">Start Conversation</button>
+          </div>
+        </div>
+      )}
+      <main className="container mx-auto px-4">
         {children}
       </main>
     </div>
