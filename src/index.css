@@ -1,104 +1,61 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './styles/global.css';
+@import './styles/card.css';
+@import './styles/button.css';
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+/* Additional custom component styles */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 221 52% 26%;  /* MS Amlin blue */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+/* Compliance Meter colors */
+:root {
+  --compliance-red: #ff4d4f;
+  --compliance-yellow: #faad14;
+  --compliance-green: #52c41a;
+  --amlin-blue: #1d4289;
+  --amlin-gray: #f3f4f6;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
+/* App container */
+.app-container {
+  min-height: 100vh;
+  background-color: rgba(243, 244, 246, 0.3);
 }
 
-@layer components {
-  .app-container {
-    @apply min-h-screen bg-amlin-gray/30;
-  }
-  
-  .tab-active {
-    @apply text-amlin-blue font-semibold border-b-2 border-amlin-blue;
-  }
-  
-  .support-panel {
-    @apply bg-gray-100 rounded-lg p-4 h-full;
-  }
-  
-  .card-container {
-    @apply bg-white rounded-lg shadow p-4 h-full;
-  }
-  
-  .section-title {
-    @apply text-lg font-semibold text-amlin-blue mb-2;
-  }
-  
-  .subsection-title {
-    @apply text-sm font-medium text-gray-700 mb-1;
-  }
+/* Tab styles */
+.tab-active {
+  color: var(--amlin-blue);
+  font-weight: 600;
+  border-bottom: 2px solid var(--amlin-blue);
+}
+
+/* Support panel */
+.support-panel {
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: 100%;
+}
+
+/* Card container */
+.card-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  height: 100%;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--amlin-blue);
+  margin-bottom: 0.5rem;
+}
+
+/* Subsection titles */
+.subsection-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-gray-700);
+  margin-bottom: 0.25rem;
 }

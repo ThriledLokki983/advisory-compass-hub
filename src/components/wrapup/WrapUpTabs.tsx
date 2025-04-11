@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
 
 interface WrapUpTabsProps {
   tabs: string[];
@@ -14,22 +13,37 @@ const WrapUpTabs: React.FC<WrapUpTabsProps> = ({
   onTabChange
 }) => {
   return (
-    <div className="border-b border-gray-200 mb-6">
-      <div className="flex space-x-8">
+    <div className="wrapup-tabs" style={{ borderBottom: '1px solid var(--border-gray-200)', marginBottom: '1.5rem' }}>
+      <div className="tabs-container" style={{ display: 'flex', gap: '2rem' }}>
         {tabs.map((tab) => (
           <button
             key={tab}
-            className={cn(
-              "py-3 px-1 text-sm font-medium relative",
-              activeTab === tab
-                ? "text-amlin-blue"
-                : "text-gray-500 hover:text-gray-800"
-            )}
+            className={`tab-button${activeTab === tab ? ' tab-active' : ''}`}
+            style={{
+              padding: '0.75rem 0.25rem',
+              fontSize: '0.875rem',
+              fontWeight: 500,
+              position: 'relative',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: activeTab === tab ? 'var(--amlin-blue)' : 'var(--text-gray-500)',
+            }}
             onClick={() => onTabChange(tab)}
           >
             {tab}
             {activeTab === tab && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amlin-blue"></span>
+              <span 
+                className="active-indicator" 
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '2px',
+                  backgroundColor: 'var(--amlin-blue)'
+                }}
+              ></span>
             )}
           </button>
         ))}

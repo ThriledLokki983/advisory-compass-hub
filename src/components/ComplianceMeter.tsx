@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
 
 interface ComplianceMeterProps {
   value: number; // 0-100
@@ -42,10 +41,12 @@ const ComplianceMeter: React.FC<ComplianceMeterProps> = ({
   // Calculate the angle for the needle
   const needleAngle = -90 + (value / 100 * 180);
   
+  const meterContainerClass = `compliance-meter-container ${className || ''}`;
+  
   return (
-    <div className={cn("flex flex-col items-center", className)}>
-      <div className="text-center mb-1 font-semibold text-gray-700">COMPLIANCE METER</div>
-      <div className="relative" style={{ width: `${width}px`, height: `${height}px` }}>
+    <div className={meterContainerClass} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className="compliance-meter-label" style={{ textAlign: 'center', marginBottom: '0.25rem', fontWeight: 600, color: 'var(--text-gray-700)' }}>COMPLIANCE METER</div>
+      <div className="compliance-meter" style={{ position: 'relative', width: `${width}px`, height: `${height}px` }}>
         {/* Background arc */}
         <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
           <defs>
@@ -87,19 +88,26 @@ const ComplianceMeter: React.FC<ComplianceMeterProps> = ({
         </svg>
       </div>
       
-      <div className={cn(
-        "text-sm font-medium mt-2 text-center",
-        {
-          'text-compliance-red': complianceClass === 'compliance-red',
-          'text-compliance-yellow': complianceClass === 'compliance-yellow',
-          'text-compliance-green': complianceClass === 'compliance-green'
-        }
-      )}>
+      <div 
+        className={`compliance-text-${complianceClass}`} 
+        style={{ 
+          fontSize: '0.875rem', 
+          fontWeight: 500, 
+          marginTop: '0.5rem', 
+          textAlign: 'center', 
+          color: `var(--${complianceClass})` 
+        }}
+      >
         {complianceText}
       </div>
       
       {showAlert && complianceClass === 'compliance-red' && (
-        <div className="text-xs text-compliance-red mt-1 text-center">
+        <div style={{ 
+          fontSize: '0.75rem', 
+          color: 'var(--compliance-red)', 
+          marginTop: '0.25rem', 
+          textAlign: 'center' 
+        }}>
           Immediate action needed, topic will be prioritized during conversation.
         </div>
       )}

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import WrapUpTabs from '@/components/wrapup/WrapUpTabs';
@@ -138,9 +137,13 @@ const sources = [
   }
 ];
 
-const WrapUp: React.FC = () => {
+const WrapUp = () => {
   const [activeTab, setActiveTab] = useState('Summary');
-  const tabs = ['Summary', 'Action points', 'Learning points'];
+  const tabs = [
+    'Summary',
+    'Action points',
+    'Learning points'
+  ];
 
   const handleEdit = () => {
     toast.info("Edit mode enabled", {
@@ -161,20 +164,25 @@ const WrapUp: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-amlin-blue">Wrap-up</h2>
+    <div style={{ marginBottom: '1.5rem' }}>
+      <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--amlin-blue)', marginBottom: '1rem' }}>Wrap-up</h2>
       
-      <WrapUpTabs 
+      <WrapUpTabs
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />
       
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        {/* Main content */}
-        <div className="md:col-span-9">
+      <div className="wrap-up-content" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(1, 1fr)', 
+        gap: '1.5rem' 
+      }}>
+        <div className="main-content" style={{ 
+          gridColumn: 'span 1',
+        }}>
           {activeTab === 'Summary' && (
-            <SummaryContent 
+            <SummaryContent
               content={summaryContent}
               onEdit={handleEdit}
               onShare={handleShare}
@@ -182,7 +190,7 @@ const WrapUp: React.FC = () => {
           )}
           
           {activeTab === 'Action points' && (
-            <ActionPoints 
+            <ActionPoints
               actionPoints={actionPoints}
               onEdit={handleEdit}
               onShare={handleShare}
@@ -190,7 +198,7 @@ const WrapUp: React.FC = () => {
           )}
           
           {activeTab === 'Learning points' && (
-            <LearningPoints 
+            <LearningPoints
               categories={learningCategories}
               onEdit={handleEdit}
               onOpenKnowledgeCenter={handleOpenKnowledgeCenter}
@@ -198,11 +206,28 @@ const WrapUp: React.FC = () => {
           )}
         </div>
         
-        {/* Sources sidebar */}
-        <div className="md:col-span-3">
+        <div className="sidebar" style={{ 
+          gridColumn: 'span 1',
+        }}>
           <Sources sources={sources} />
         </div>
       </div>
+      
+      <style jsx>{`
+        @media (min-width: 768px) {
+          .wrap-up-content {
+            grid-template-columns: repeat(12, 1fr);
+          }
+          
+          .main-content {
+            grid-column: span 9;
+          }
+          
+          .sidebar {
+            grid-column: span 3;
+          }
+        }
+      `}</style>
     </div>
   );
 };
