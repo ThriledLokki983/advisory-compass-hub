@@ -49,7 +49,7 @@ const ComplianceMeter: React.FC<ComplianceMeterProps> = ({
         {/* Background arc */}
         <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
           <defs>
-            <linearGradient id="complianceGradient" x1="0%" y1="0%" x2="100%" y1="0%">
+            <linearGradient id="complianceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#ff4d4f" />
               <stop offset="50%" stopColor="#faad14" />
               <stop offset="100%" stopColor="#52c41a" />
