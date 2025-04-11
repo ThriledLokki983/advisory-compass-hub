@@ -13,36 +13,22 @@ const WrapUpTabs: React.FC<WrapUpTabsProps> = ({
   onTabChange
 }) => {
   return (
-    <div className="wrapup-tabs" style={{ borderBottom: '1px solid var(--border-gray-200)', marginBottom: '1.5rem' }}>
-      <div className="tabs-container" style={{ display: 'flex', gap: '2rem' }}>
+    <div className="border-b border-gray-200 mb-6">
+      <div className="flex gap-8">
         {tabs.map((tab) => (
           <button
             key={tab}
-            className={`tab-button${activeTab === tab ? ' tab-active' : ''}`}
-            style={{
-              padding: '0.75rem 0.25rem',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              position: 'relative',
-              backgroundColor: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              color: activeTab === tab ? 'var(--amlin-blue)' : 'var(--text-gray-500)',
-            }}
+            className={`py-3 px-1 text-sm font-medium relative ${
+              activeTab === tab 
+                ? 'text-amlin-blue font-semibold' 
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
             onClick={() => onTabChange(tab)}
           >
             {tab}
             {activeTab === tab && (
               <span 
-                className="active-indicator" 
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  backgroundColor: 'var(--amlin-blue)'
-                }}
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-amlin-blue"
               ></span>
             )}
           </button>

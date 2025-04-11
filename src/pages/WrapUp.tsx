@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import WrapUpTabs from '@/components/wrapup/WrapUpTabs';
@@ -164,8 +165,8 @@ const WrapUp = () => {
   };
 
   return (
-    <div style={{ marginBottom: '1.5rem' }}>
-      <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--amlin-blue)', marginBottom: '1rem' }}>Wrap-up</h2>
+    <div className="mb-6">
+      <h2 className="text-2xl font-bold text-amlin-blue mb-4">Wrap-up</h2>
       
       <WrapUpTabs
         tabs={tabs}
@@ -173,14 +174,8 @@ const WrapUp = () => {
         onTabChange={setActiveTab}
       />
       
-      <div className="wrap-up-content" style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(1, 1fr)', 
-        gap: '1.5rem' 
-      }}>
-        <div className="main-content" style={{ 
-          gridColumn: 'span 1',
-        }}>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+        <div className="md:col-span-9">
           {activeTab === 'Summary' && (
             <SummaryContent
               content={summaryContent}
@@ -206,28 +201,10 @@ const WrapUp = () => {
           )}
         </div>
         
-        <div className="sidebar" style={{ 
-          gridColumn: 'span 1',
-        }}>
+        <div className="md:col-span-3">
           <Sources sources={sources} />
         </div>
       </div>
-      
-      <style jsx>{`
-        @media (min-width: 768px) {
-          .wrap-up-content {
-            grid-template-columns: repeat(12, 1fr);
-          }
-          
-          .main-content {
-            grid-column: span 9;
-          }
-          
-          .sidebar {
-            grid-column: span 3;
-          }
-        }
-      `}</style>
     </div>
   );
 };

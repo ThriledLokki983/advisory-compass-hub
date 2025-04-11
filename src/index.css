@@ -1,9 +1,7 @@
 
-@import './styles/global.css';
-@import './styles/card.css';
-@import './styles/button.css';
-
-/* Additional custom component styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Compliance Meter colors */
 :root {
@@ -14,48 +12,26 @@
   --amlin-gray: #f3f4f6;
 }
 
-/* App container */
-.app-container {
-  min-height: 100vh;
-  background-color: rgba(243, 244, 246, 0.3);
-}
+@layer components {
+  .tab-active {
+    color: var(--amlin-blue);
+    font-weight: 600;
+    border-bottom: 2px solid var(--amlin-blue);
+  }
 
-/* Tab styles */
-.tab-active {
-  color: var(--amlin-blue);
-  font-weight: 600;
-  border-bottom: 2px solid var(--amlin-blue);
-}
+  .support-panel {
+    @apply bg-gray-100 rounded-lg p-4 h-full;
+  }
 
-/* Support panel */
-.support-panel {
-  background-color: #f3f4f6;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  height: 100%;
-}
+  .card-container {
+    @apply bg-white rounded-lg shadow p-4 h-full;
+  }
 
-/* Card container */
-.card-container {
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  height: 100%;
-}
+  .section-title {
+    @apply text-lg font-semibold text-amlin-blue mb-2;
+  }
 
-/* Section titles */
-.section-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--amlin-blue);
-  margin-bottom: 0.5rem;
-}
-
-/* Subsection titles */
-.subsection-title {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-gray-700);
-  margin-bottom: 0.25rem;
+  .subsection-title {
+    @apply text-sm font-medium text-gray-700 mb-1;
+  }
 }
