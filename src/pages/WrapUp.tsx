@@ -115,25 +115,25 @@ const sources = [
   {
     id: uuidv4(),
     title: 'Business policy.pdf',
-    type: 'document',
+    type: 'document' as const,
     url: '#'
   },
   {
     id: uuidv4(),
     title: 'Exported data folder',
-    type: 'document',
+    type: 'document' as const,
     url: '#'
   },
   {
     id: uuidv4(),
     title: 'Client summary link',
-    type: 'link',
+    type: 'link' as const,
     url: '#'
   },
   {
     id: uuidv4(),
     title: 'Comprehensive agricultural risk management',
-    type: 'link',
+    type: 'link' as const,
     url: '#'
   }
 ];
