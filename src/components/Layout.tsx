@@ -28,14 +28,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="app-container">
       <header className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <MSAmlinLogo />
             <nav className="hidden md:flex">
               {tabs.map((tab) => (
                 <button
                   key={tab.path}
-                  className={`px-4 py-2 text-sm font-medium ${
+                  className={`px-4 py-4 text-sm font-medium ${
                     activeTab === tab.path ? 'tab-active' : 'text-gray-600 hover:text-gray-900'
                   }`}
                   onClick={() => handleTabChange(tab.path)}
@@ -77,7 +77,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </header>
       {/* only show this at the preparation page */}
       {activeTab === '/' && (
-        <div className="p-4 shadow-sm bg-white border-t border-gray-200">
+        <div className="py-3 shadow-sm bg-white border-t border-gray-200">
           <div className="container mx-auto px-4 flex justify-end">
             <button className="bg-[#E11F27] text-white px-8 py-2 rounded-full">Start Conversation</button>
           </div>
