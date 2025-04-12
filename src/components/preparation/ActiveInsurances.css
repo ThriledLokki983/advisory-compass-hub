@@ -1,0 +1,10 @@
+
+/* This file was referenced but missing */
+/* ActiveInsurances component styles */
+.active-insurance-card {
+  transition: all 0.2s ease;
+}
+
+.active-insurance-card:hover {
+  background-color: rgba(27, 20, 100, 0.05);
+}
