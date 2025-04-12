@@ -1,0 +1,26 @@
+.agenda-item {
+	position: relative;
+}
+
+.agenda-item:not(:last-of-type) > div {
+	width: 1px; position: absolute; inset: 0.75rem 0 0.5rem 0; height: 30px;
+}
+
+.agenda-item > span {
+	padding-left: 1.15rem;
+}
+
+.agenda-item:last-of-type > span {
+	transform: translateY(-3px);
+}
+
+.agenda-item::after {
+  content: "";
+  position: absolute;
+	inset: 0.25rem 0 0.5rem -0.45rem;
+  width: 15px;
+  height: 15px; border-radius: 100%;
+  display: block;
+  background-color: #F7F6F9;
+	border: 1px solid #DEDAFF;
+}
