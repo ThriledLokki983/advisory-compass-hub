@@ -27,12 +27,8 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
   };
 
   return (
-    <div className="support-panel flex flex-col h-full bg-gray-50 rounded-md">
-      <div className="bg-[#E9E8F7] p-4">
-        <h3 className="text-lg font-semibold text-[#2D2D6D]">{title}</h3>
-      </div>
-
-      <div className="p-4 flex-1 space-y-6">
+    <div className="bg-white p-4 rounded-lg shadow-sm mt-0 flex-1 flex flex-col">
+      <div className="p-4 flex-1 flex flex-col">
         {insights && (
           <div>
             {insights}
@@ -40,15 +36,16 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
         )}
 
         {suggestions.length > 0 && (
-          <div className="space-y-2">
+          <div className="space-y-2 mt-auto">
             {suggestions.map((suggestion, index) => (
               <Button
                 key={index}
                 variant="outline"
-                className="w-full justify-between text-left text-[#2D2D6D] bg-white"
+                className="w-full p-3 justify-between text-left text-[#2D2D6D] bg-white flex items-center text-wrap rounded-xl"
+                style={{ height: 'max-content' }}
                 onClick={() => onSuggestionClick && onSuggestionClick(suggestion)}
               >
-                <span className="mr-2">{suggestion}</span>
+                <span className="mr-2 font-[400]">{suggestion}</span>
                 <ChevronRight className="h-4 w-4 flex-shrink-0" />
               </Button>
             ))}
@@ -56,18 +53,20 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
         )}
       </div>
 
-      <div className="p-4 border-t border-gray-200 mt-auto">
-        <div className="flex space-x-2">
+      <div className="p-2 border-gray-200 mt-auto">
+        <div className="t-4 bg-[#F3F3F3] p-3 rounded flex items-center gap-2 mt-auto">
           <Input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Message MS Amlin support"
-            className="flex-1 bg-white"
+            className="flex-1 bg-transparent border-none text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           />
-          <Button size="icon" onClick={handleSend} variant="ghost">
-            <Send className="h-4 w-4 text-[#2D2D6D]" />
-          </Button>
+          <button onClick={handleSend} className='text-[#1B1464] p-1'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none"><mask id="a" width="25" height="24" x="0" y="0" maskUnits="userSpaceOnUse">
+              <path fill="#D9D9D9" stroke="#E5E3EB" d="M.812.5h23v23h-23z"/></mask><g mask="url(#a)"><path fill="#1B1D64" stroke="#E5E3EB" strokeWidth=".025" d="M5.3 16.837v.02l.017-.008 11.85-5.196.026-.012-.026-.011-11.85-5.196-.017-.008V10.292l.01.002 5.374 1.347-5.375 1.347-.01.003V16.837Zm-1.475 2.32V4.125l17.168 7.515-17.168 7.515Z"/></g>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
