@@ -163,41 +163,41 @@ const WrapUp: React.FC = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-amlin-blue">Wrap-up</h2>
-      
-      <WrapUpTabs 
+
+      <WrapUpTabs
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />
-      
+
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Main content */}
         <div className="md:col-span-9">
           {activeTab === 'Summary' && (
-            <SummaryContent 
+            <SummaryContent
               content={summaryContent}
               onEdit={handleEdit}
               onShare={handleShare}
             />
           )}
-          
+
           {activeTab === 'Action points' && (
-            <ActionPoints 
+            <ActionPoints
               actionPoints={actionPoints}
               onEdit={handleEdit}
               onShare={handleShare}
             />
           )}
-          
+
           {activeTab === 'Learning points' && (
-            <LearningPoints 
+            <LearningPoints
               categories={learningCategories}
               onEdit={handleEdit}
               onOpenKnowledgeCenter={handleOpenKnowledgeCenter}
             />
           )}
         </div>
-        
+
         {/* Sources sidebar */}
         <div className="md:col-span-3">
           <Sources sources={sources} />

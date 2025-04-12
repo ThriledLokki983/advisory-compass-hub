@@ -21,7 +21,7 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ products }) => {
     <Card>
       <CardHeader className="pb-2 flex flex-row items-center justify-between">
         <CardTitle className="text-lg">Suggested additional insurance products</CardTitle>
-        <button 
+        <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-gray-500 hover:text-gray-900"
         >
@@ -36,8 +36,8 @@ const SuggestedProducts: React.FC<SuggestedProductsProps> = ({ products }) => {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {products.map((product) => (
-              <div 
-                key={product.id} 
+              <div
+                key={product.id}
                 className="border border-gray-200 rounded-md p-4"
               >
                 <h4 className="font-medium mb-2">{product.name}</h4>

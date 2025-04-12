@@ -26,8 +26,8 @@ const topicContent: Record<string, { title: string; points: { id: string; conten
   'production-capacity': {
     title: 'Production Capacity Utilization',
     points: [
-      { 
-        id: uuidv4(), 
+      {
+        id: uuidv4(),
         content: 'Impact of 20% increase in production capacity due to new machines on operational efficiency'
       },
       {
@@ -80,10 +80,10 @@ const topicContent: Record<string, { title: string; points: { id: string; conten
 const supportInsights = (
   <div className="space-y-4">
     <h4 className="font-semibold mb-2">Key insurance implications</h4>
-    
+
     <div className="prose text-sm">
       <p>Regarding the new potato slicing machine, consider these key insurance implications:</p>
-      
+
       <ul className="list-disc pl-5 space-y-2 mt-2">
         <li>
           <strong>Coverage needs:</strong> we'll need to adjust the equipment breakdown insurance to encompass potential mechanical failures.
@@ -121,7 +121,7 @@ const Conversation: React.FC = () => {
           points: []
         };
       }
-      
+
       // Add the new point
       const newPoint = { id: uuidv4(), content: pointContent };
       return {
@@ -138,43 +138,43 @@ const Conversation: React.FC = () => {
     console.log('Suggestion clicked:', suggestion);
   };
 
-  const currentContent = content[activeTopic] || { 
-    title: initialTopics.find(t => t.id === activeTopic)?.title || 'No content', 
-    points: [] 
+  const currentContent = content[activeTopic] || {
+    title: initialTopics.find(t => t.id === activeTopic)?.title || 'No content',
+    points: []
   };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
       {/* Left sidebar - Topics list */}
       <div className="md:col-span-2">
-        <TopicsSidebar 
+        <TopicsSidebar
           topics={initialTopics}
           activeTopic={activeTopic}
           onTopicChange={setActiveTopic}
         />
       </div>
-      
+
       {/* Middle column - Topic content */}
       <div className="md:col-span-7 space-y-6">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <h2 className="text-2xl font-bold text-amlin-blue mb-2 md:mb-0">Conversation topics</h2>
-          <ComplianceMeter 
-            value={25} 
+          <ComplianceMeter
+            value={25}
             showAlert={true}
             size="lg"
           />
         </div>
-        
-        <TopicContent 
+
+        <TopicContent
           title={currentContent.title}
           points={currentContent.points}
           onAddPoint={(content) => handleAddPoint(activeTopic, content)}
         />
       </div>
-      
+
       {/* Right column - Support */}
       <div className="md:col-span-3">
-        <SupportPanel 
+        <SupportPanel
           title="MS Amlin support"
           insights={supportInsights}
           suggestions={supportSuggestions}

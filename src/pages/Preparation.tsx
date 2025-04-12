@@ -191,7 +191,7 @@ const Preparation: React.FC = () => {
                   className="flex-1 bg-transparent border-none text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
                 />
                 <button className="text-[#1B1464] p-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none"><mask id="a" width="25" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#D9D9D9" stroke="#E5E3EB" d="M.812.5h23v23h-23z"/></mask><g mask="url(#a)"><path fill="#1B1D64" stroke="#E5E3EB" stroke-width=".025" d="M5.3 16.837v.02l.017-.008 11.85-5.196.026-.012-.026-.011-11.85-5.196-.017-.008V10.292l.01.002 5.374 1.347-5.375 1.347-.01.003V16.837Zm-1.475 2.32V4.125l17.168 7.515-17.168 7.515Z"/></g></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none"><mask id="a" width="25" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#D9D9D9" stroke="#E5E3EB" d="M.812.5h23v23h-23z"/></mask><g mask="url(#a)"><path fill="#1B1D64" stroke="#E5E3EB" strokeWidth=".025" d="M5.3 16.837v.02l.017-.008 11.85-5.196.026-.012-.026-.011-11.85-5.196-.017-.008V10.292l.01.002 5.374 1.347-5.375 1.347-.01.003V16.837Zm-1.475 2.32V4.125l17.168 7.515-17.168 7.515Z"/></g></svg>
                 </button>
             </div>
           </div>

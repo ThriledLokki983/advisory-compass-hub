@@ -23,8 +23,8 @@ const Sources: React.FC<SourcesProps> = ({ sources }) => {
       <CardContent>
         <ul className="space-y-3">
           {sources.map((source) => (
-            <li 
-              key={source.id} 
+            <li
+              key={source.id}
               className="flex items-start"
             >
               {source.type === 'link' ? (
@@ -32,9 +32,9 @@ const Sources: React.FC<SourcesProps> = ({ sources }) => {
               ) : (
                 <File className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0 text-gray-500" />
               )}
-              <a 
-                href={source.url} 
-                target="_blank" 
+              <a
+                href={source.url}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-amlin-blue hover:underline text-sm"
               >

@@ -37,8 +37,8 @@ const TopicContent: React.FC<TopicContentProps> = ({
       </CardHeader>
       <CardContent className="space-y-6">
         {points.map((point) => (
-          <div 
-            key={point.id} 
+          <div
+            key={point.id}
             className="p-4 border-l-2 border-amlin-blue bg-gray-50 rounded-r-md"
           >
             <p>{point.content}</p>
