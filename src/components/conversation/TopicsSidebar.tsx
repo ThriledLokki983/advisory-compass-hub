@@ -20,22 +20,28 @@ const TopicsSidebar: React.FC<TopicsSidebarProps> = ({
 }) => {
   return (
     <Card className="h-full">
-      <CardContent className="p-2">
-        <ul className="space-y-1">
-          {topics.map((topic) => (
-            <li key={topic.id}>
-              <button
-                className={`w-full text-left px-3 py-2 rounded-md text-sm ${
-                  activeTopic === topic.id
-                    ? 'bg-amlin-blue text-white'
-                    : 'hover:bg-gray-100 text-gray-700'
-                }`}
-                onClick={() => onTopicChange(topic.id)}
-              >
-                {topic.title}
-              </button>
-            </li>
-          ))}
+      <CardContent className="p-0">
+        <ul className="space-y-0">
+          {topics.map((topic) => {
+            const isActive = activeTopic === topic.id;
+            return (
+              <li key={topic.id} className="relative">
+                {isActive && (
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-500"></div>
+                )}
+                <button
+                  className={`w-full text-left px-4 py-3 border-b border-gray-100 ${
+                    isActive
+                      ? 'text-red-500 font-medium'
+                      : 'text-[#2D2D6D] hover:bg-gray-50'
+                  }`}
+                  onClick={() => onTopicChange(topic.id)}
+                >
+                  {topic.title}
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </CardContent>
     </Card>
