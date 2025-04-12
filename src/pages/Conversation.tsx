@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import TopicsSidebar from '@/components/conversation/TopicsSidebar';
 import TopicContent from '@/components/conversation/TopicContent';
 import SupportPanel from '@/components/SupportPanel';
@@ -27,11 +26,11 @@ const topicContent: Record<string, { title: string; points: { id: string; conten
     title: 'Production Capacity Utilization',
     points: [
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Impact of 20% increase in production capacity due to new machines on operational efficiency'
       },
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Strategies for maximizing the benefits of increased production capabilities'
       }
     ]
@@ -40,11 +39,11 @@ const topicContent: Record<string, { title: string; points: { id: string; conten
     title: 'Revenue Growth Insights',
     points: [
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Discussion of factors contributing to the 15% revenue growth and how insurance can support continued growth'
       },
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Exploring potential investments or expansions supported by increased revenue'
       }
     ]
@@ -53,11 +52,11 @@ const topicContent: Record<string, { title: string; points: { id: string; conten
     title: 'Insurance Claim Experience',
     points: [
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Overview of the claims submitted in 2024 and lessons learned from them'
       },
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Mitigation strategies to prevent similar incidents (e.g., machine failure, water leakage)'
       }
     ]
@@ -66,11 +65,11 @@ const topicContent: Record<string, { title: string; points: { id: string; conten
     title: 'Compliance',
     points: [
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Review of current compliance status and areas for improvement'
       },
       {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         content: 'Discussion of new regulations affecting the manufacturing sector and required adaptations'
       }
     ]
@@ -123,7 +122,7 @@ const Conversation: React.FC = () => {
       }
 
       // Add the new point
-      const newPoint = { id: uuidv4(), content: pointContent };
+      const newPoint = { id: crypto.randomUUID(), content: pointContent };
       return {
         ...prev,
         [topicId]: {
