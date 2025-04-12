@@ -20,7 +20,7 @@ const WrapUpTabs: React.FC<WrapUpTabsProps> = ({
           <button
             key={tab}
             className={cn(
-              "py-3 px-1 text-sm font-medium relative",
+              "py-3 px-1 text-sm font-medium relative capitalize",
               activeTab === tab
                 ? "text-amlin-blue"
                 : "text-gray-500 hover:text-gray-800"

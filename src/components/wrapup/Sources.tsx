@@ -18,7 +18,7 @@ const Sources: React.FC<SourcesProps> = ({ sources }) => {
   return (
     <Card className="h-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">Sources</CardTitle>
+        <CardTitle className="text-lg">Links</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="space-y-3">
