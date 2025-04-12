@@ -1,10 +1,27 @@
 
-/* This file was referenced but missing */
-/* ActiveInsurances component styles */
-.active-insurance-card {
-  transition: all 0.2s ease;
+/* Styling for active insurances component */
+.insurance-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
-.active-insurance-card:hover {
-  background-color: rgba(27, 20, 100, 0.05);
+.insurance-list-item:not(:last-child) {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.insurance-type {
+  font-weight: 500;
+  color: #1B1464;
+}
+
+.insurance-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.suggested-insurance {
+  margin-top: 0.5rem;
+  color: #1B1464;
 }
