@@ -118,7 +118,7 @@ const suggestedProducts = [
 
 const supportInsights = (
   <div className="space-y-4">
-    <p className="text-sm">
+    <p className="text-sm ">
       Regarding the compliance status, this company needs your immediate attention.
     </p>
 
