@@ -22,14 +22,14 @@ const WrapUpTabs: React.FC<WrapUpTabsProps> = ({
             className={cn(
               "py-3 px-1 text-sm font-medium relative capitalize",
               activeTab === tab
-                ? "text-amlin-blue"
-                : "text-gray-500 hover:text-gray-800"
+                ? "text-[#E11F27]"
+                : "text-gray-500 hover:text-gray-700"
             )}
             onClick={() => onTabChange(tab)}
           >
             {tab}
             {activeTab === tab && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amlin-blue"></span>
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E11F27]"></span>
             )}
           </button>
         ))}
