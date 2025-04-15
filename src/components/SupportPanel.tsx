@@ -20,7 +20,7 @@ interface AnimatedSuggestionProps {
 
 const AnimatedSuggestion: React.FC<AnimatedSuggestionProps> = ({ suggestion, index, onSuggestionClick, show }) => (
   <div
-    className={`transition-all duration-500 ease-out transform absolute w-full ${show ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-4 opacity-0 pointer-events-none'}`}
+    className={`transition-all duration-500 ease-out transform w-full mb-4 ${show ? 'block translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-4 hidden opacity-0 pointer-events-none'}`}
     style={{ top: `${(index) * 72}px` }}
   >
     <Button
@@ -43,6 +43,7 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
 }) => {
   const [message, setMessage] = useState('');
   const [visibleSuggestions, setVisibleSuggestions] = useState<boolean[]>([]);
+  const [aiStatusText, setAiStatusText] = useState('AI is listening');
 
   useEffect(() => {
     setVisibleSuggestions(new Array(suggestions.length).fill(false));
@@ -58,6 +59,14 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
       }, delay);
     });
   }, [suggestions.length]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAiStatusText('Detected topic');
+    }, 26000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSend = () => {
     if (message.trim()) {
@@ -76,8 +85,12 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
         )}
 
         {suggestions.length > 0 && (
-          <div className="space-y-2 mt-auto">
-            <div className="relative h-[125px]">
+          <div className="space-y-2 relative flex h-full">
+            <div className="absolute h-full content-end flex-column">
+            <div className="flex items-center flex-row mb-1">
+              <span className="loader mr-1"></span>
+              <span className="text-xs">{aiStatusText}</span>
+            </div>
               {suggestions.map((suggestion, index) => (
                 <AnimatedSuggestion
                   key={index}
