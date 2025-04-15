@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChevronRight, Send } from 'lucide-react';
@@ -20,17 +20,20 @@ interface AnimatedSuggestionProps {
 
 const AnimatedSuggestion: React.FC<AnimatedSuggestionProps> = ({ suggestion, index, onSuggestionClick, show }) => (
   <div
-    className={`transition-all duration-500 ease-out transform w-full mb-4 ${show ? 'block translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-4 hidden opacity-0 pointer-events-none'}`}
+    className={`transition-all duration-500 ease-out transform w-[80%] mt-4 ${show ? 'block translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-4 hidden opacity-0 pointer-events-none'}`}
     style={{ top: `${(index) * 72}px` }}
   >
     <Button
-      variant="outline"
-      className="w-full p-3 justify-between text-left text-[#2D2D6D] bg-white flex items-center text-wrap rounded-xl"
-      style={{ height: 'max-content' }}
-      onClick={() => onSuggestionClick && onSuggestionClick(suggestion)}
+    variant="outline"
+    className="w-full p-3 text-left text-[#2D2D6D] bg-white flex justify-between items-start whitespace-normal rounded-xl"
+    style={{ height: 'max-content' }}
+    onClick={() => onSuggestionClick && onSuggestionClick(suggestion)}
     >
-      <span className="mr-2 font-[400]" dangerouslySetInnerHTML={{ __html: suggestion }}></span>
-      <ChevronRight className="h-4 w-4 flex-shrink-0" />
+      <div className="flex flex-col">
+        <p className="text-[12px] uppercase pb-2 leading-none">&rarr; Prompt suggestion</p>
+        <p className="mr-2 font-[400]" dangerouslySetInnerHTML={{ __html: suggestion }} />
+      </div>
+      <ChevronRight className="h-4 w-4 flex-shrink-0 mt-1" />
     </Button>
   </div>
 );
@@ -42,30 +45,64 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
   onSuggestionClick,
 }) => {
   const [message, setMessage] = useState('');
-  const [visibleSuggestions, setVisibleSuggestions] = useState<boolean[]>([]);
+  const [visibleSuggestions, setVisibleSuggestions] = useState<{ text: string; type: 'preprompt' | 'action' }[]>([]);
   const [aiStatusText, setAiStatusText] = useState('AI is listening');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [aiIsActive, setAiIsActive] = useState(false);
 
   useEffect(() => {
-    setVisibleSuggestions(new Array(suggestions.length).fill(false));
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [visibleSuggestions]);
 
-    suggestions.forEach((_, index) => {
-      const delay = 26500 + (index * 25500); // 10s initial delay, then 5s between each
+  useEffect(() => {
+    const timeline: { time: number; text: string; type: 'preprompt' | 'action' }[] = [
+      { time: 20000, text: 'Freddie: send the value of the new machine', type: 'action' },
+      { time: 26500, text: 'Calculate an estimate of the new insurance premium based on the new machine of 250000 euro', type: 'preprompt' },
+      { time: 53000, text: 'List the key coverage for the equipment breakdown insurance', type: 'preprompt' },
+      { time: 56000, text: 'Agnes: send details of equipment breakdown insurance and business interruption insurance', type: 'action' },
+      { time: 62000, text: 'Freddie: send invoice of the new machine within three days', type: 'action' },
+      { time: 70000, text: 'Agnes: adjust policy fire insurance, calculate new premium', type: 'action' },
+    ];
+  
+    setVisibleSuggestions([]); // reset
+  
+    timeline.forEach(({ time, text, type }) => {
       setTimeout(() => {
-        setVisibleSuggestions(prev => {
-          const newState = [...prev];
-          newState[index] = true;
-          return newState;
-        });
-      }, delay);
+        setVisibleSuggestions(prev => [...prev, { text, type }]);
+      }, time);
     });
-  }, [suggestions.length]);
+  }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAiStatusText('Detected topic');
-    }, 26000);
-
-    return () => clearTimeout(timer);
+    const events = [
+      { time: 19500, text: 'Action point detected' },
+      { time: 26000, text: 'Topic detected' },
+      { time: 52500, text: 'Topic detected' },
+      { time: 55500, text: 'Action point detected' },
+      { time: 61500, text: 'Action point detected' },
+      { time: 69500, text: 'Action point detected' },
+    ];
+  
+    const timers: NodeJS.Timeout[] = [];
+  
+    events.forEach(({ time, text }) => {
+      timers.push(setTimeout(() => {
+        setAiStatusText(text);
+        setAiIsActive(true); // trigger blue flash
+      }, time));
+  
+      timers.push(setTimeout(() => {
+        setAiIsActive(false); // remove blue
+        setAiStatusText('AI is listening');
+      }, time + 800));
+    });
+  
+    return () => timers.forEach(clearTimeout);
   }, []);
 
   const handleSend = () => {
@@ -76,36 +113,45 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm mt-0 flex-1 flex flex-col">
-      <div className="p-4 flex-1 flex flex-col">
+    <div className="bg-white p-4 rounded-lg shadow-sm mt-0 flex-1 relative flex flex-col  max-h-[calc(100vh-130px)]">
+      <div ref={scrollContainerRef}
+       className="p-2 flex-1 flex flex-col overflow-y-auto">
         {insights && (
           <div>
             {insights}
           </div>
         )}
+        {visibleSuggestions.map((item, index) => (
+          item.type === 'preprompt' ? (
+            <AnimatedSuggestion
+              key={index}
+              suggestion={item.text}
+              index={index}
+              onSuggestionClick={onSuggestionClick}
+              show={true}
+            />
+          ) : (
+            <div
+              key={index}
+              className="mt-4 px-3 py-2 text-sm text-[#1B1464] bg-[#F3F3F3] border border-[#E0E0E0] rounded-tl-xl rounded-tr-xl rounded-br-xl w-[80%]"
+            >
+              <p className='text-[12px] uppercase pb-1'>○ Action point</p>
+              {item.text}
+            </div>
+          )
+        ))}
 
-        {suggestions.length > 0 && (
-          <div className="space-y-2 relative flex h-full">
-            <div className="absolute h-full content-end flex-column">
-            <div className="flex items-center flex-row mb-1">
-              <span className="loader mr-1"></span>
-              <span className="text-xs">{aiStatusText}</span>
-            </div>
-              {suggestions.map((suggestion, index) => (
-                <AnimatedSuggestion
-                  key={index}
-                  suggestion={suggestion}
-                  index={index}
-                  onSuggestionClick={onSuggestionClick}
-                  show={visibleSuggestions[index]}
-                />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       <div className="p-2 border-gray-200 mt-auto">
+      <div className={`flex items-center flex-row mb-1 transition-all duration-500 ease-in-out
+        ${aiIsActive ? 'bg-blue-100 text-blue-800 px-2 py-1 rounded-md' : 'text-gray-500 px-2 py-1'}
+      `}>
+        <span className="loader mr-1"></span>
+        <span className={`text-xs transition-opacity duration-500 ease-in-out ${aiIsActive ? 'opacity-100' : 'opacity-70'}`}>
+          {aiStatusText}
+        </span>
+      </div>
         <div className="t-4 bg-[#F3F3F3] p-3 rounded flex items-center gap-2 mt-auto">
           <Input
             value={message}

@@ -85,28 +85,28 @@ const topicContent = {
 
 const supportInsights = (
   <div className="space-y-4 flex flex-col">
-    <div className="inline-block bg-gray-100 rounded-full text-sm p-3 text-[#2D2D6D] rounded-br-xl w-fit self-end">
+    <div className="inline-block bg-gray-100 rounded-full text-sm p-3 text-[#2D2D6D] text-sm rounded-br-xl w-fit self-end">
       Key insurance implications
     </div>
 
     <div className="rounded-md w-[80%]">
     <p className="text-sm bg-[#F3F3F3] p-4 rounded-tl-xl rounded-tr-xl rounded-br-xl rounded-bl-0 border border-[#E5E3EB]">
-      <span className="text-[#101010] text-[16px] font-light">
+      <span className="text-[#101010] text-sm font-light">
         Regarding the new potato slicing machine, consider these key insurance implications:
       </span>
     </p>
 
     <ul className="list-disc p-5 space-y-3 text-sm bg-[#F3F3F3] p-4 rounded-tl-xl rounded-tr-xl rounded-br-xl rounded-bl-0 border border-[#E5E3EB] mt-4">
-      <li className="text-[#101010] text-[16px] font-light ml-4">
+      <li className="text-[#101010] text-sm font-light ml-4">
         <strong>Coverage needs:</strong> we'll need to adjust his equipment breakdown insurance to encompass potential mechanical failures.
       </li>
-      <li className="text-[#101010] text-[16px] font-light ml-4">
+      <li className="text-[#101010] text-sm font-light ml-4">
           <strong>Compliance checks:</strong> please ensure the machine's value aligns with his current coverage limits for an updated policy.
         </li>
-        <li className="text-[#101010] text-[16px] font-light ml-4">
-          <strong>Premium impact:</strong> the addition may affect your premium - I'll calculatelihe specifics once we finalize all details.
+        <li className="text-[#101010] text-sm font-light ml-4">
+          <strong>Premium impact:</strong> the addition may affect your premium - I'll calculatel the specifics once we finalize all details.
         </li>
-        <li className="text-[#101010] text-[16px] font-light ml-4">
+        <li className="text-[#101010] text-sm font-light ml-4">
           <strong>Risk mitigation:</strong> evaluating business interruption insurance could be beneficial to manage any disruptions effectively.
         </li>
       </ul>
