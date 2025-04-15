@@ -16,9 +16,40 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
-    React.useEffect(() => {
-      setActiveTab(location.pathname);
-    }, [location.pathname]);
+  React.useEffect(() => {
+    setActiveTab(location.pathname);
+  }, [location.pathname]);
+  
+  React.useEffect(() => {
+    const playAudio = () => {
+      if (!audioRef.current) return;
+  
+      audioRef.current.currentTime = 0;
+  
+      audioRef.current
+        .play()
+        .then(() => {
+          console.log("Audio played!");
+        })
+        .catch((err) => {
+          console.warn("Autoplay failed:", err);
+        });
+    };
+  
+    if (location.pathname === '/conversation') {
+      const timeout = setTimeout(() => {
+        // Try to defer it slightly so the DOM and React tree is fully ready
+        requestAnimationFrame(playAudio);
+      }, 300);
+  
+      return () => clearTimeout(timeout);
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }, [location.pathname]); // Empty dependency array = runs only on mount
 
   const tabs = [
     { name: 'PREPARATION', path: '/' },
@@ -82,8 +113,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </header>
       {/* only show this at the preparation page */}
-      <audio ref={audioRef} preload="auto" style={{ display: 'none' }}>
-        <source src={ConversationAudio} type="audio/mp3"/>
+      <audio
+        ref={audioRef}
+        preload="auto"
+        style={{ display: 'none' }}
+      >
+        <source src={ConversationAudio} type="audio/mp3" />
       </audio>
 
       {activeTab === '/' && (
@@ -91,19 +126,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="container mx-auto px-4 flex justify-end">
             <Button
               onClick={async () => {
-                try {
-                  if (audioRef.current) {
-                    // Reset audio to start
-                    audioRef.current.currentTime = 0;
-                    await audioRef.current.play();
-                  }
-                  navigate('/conversation');
-                } catch (error) {
-                  console.error('Error playing audio:', error);
-                  // Still navigate even if audio fails
                   navigate('/conversation');
                 }
-              }}
+              }
               className="bg-[#E11F27] text-white px-8 py-2 rounded-full">
               Start Conversation
             </Button>
