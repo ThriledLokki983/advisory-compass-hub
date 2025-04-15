@@ -109,19 +109,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="container mx-auto px-4 flex justify-end">
             <Button
               onClick={async () => {
-                try {
-                  if (audioRef.current) {
-                    // Reset audio to start
-                    audioRef.current.currentTime = 0;
-                    await audioRef.current.play();
-                  }
-                  navigate('/conversation');
-                } catch (error) {
-                  console.error('Error playing audio:', error);
-                  // Still navigate even if audio fails
+                
                   navigate('/conversation');
                 }
-              }}
+              }
               className="bg-[#E11F27] text-white px-8 py-2 rounded-full">
               Start Conversation
             </Button>
