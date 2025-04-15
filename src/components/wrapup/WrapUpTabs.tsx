@@ -41,13 +41,13 @@ const WrapUpTabs: React.FC<WrapUpTabsProps> = ({
       <div className="flex gap-4">
         <button
           onClick={onEditSummary}
-          className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+          className="px-8 py-2 text-sm font-medium text-gray-700 border border-[#E11F27] rounded-full hover:bg-gray-50"
         >
           Edit summary
         </button>
         <button
           onClick={onShare}
-          className="px-4 py-2 text-sm font-medium text-white bg-[#E11F27] rounded-md hover:bg-[#c91922]"
+          className="px-8 py-2 text-sm font-medium text-white bg-[#E11F27] rounded-full hover:bg-[#c91922]"
         >
           Share with Farm Frites
         </button>
