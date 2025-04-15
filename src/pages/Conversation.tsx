@@ -160,12 +160,13 @@ const Conversation: React.FC = () => {
     <div className="grid grid-cols-1 md:grid-cols-12 ga-0" style={{ height: 'calc(100dvh - 60px)'}}>
       {/* Middle column - Topic content */}
       <div className="mt-6 md:col-span-8 space-y-6 grid md:grid-cols-8 gap-0" style={{ gridTemplateRows: 'max-content' }}>
-        <div className="flex flex-col md:flex-row items-center justify-between md:col-span-8 border-b border-border/90 py-4">
+        <div className="flex flex-col md:flex-row items-start justify-between md:col-span-8 border-b border-border/90 py-4">
           <div>
-            <h2 className="text-2xl font-bold text-[#2D2D6D] mb-2 md:mb-0">Conversation Farm Frites</h2>
+            <h2 className="text-2xl font-bold text-[#2D2D6D] mb-2 pb-4 md:mb-0">Conversation Farm Frites</h2>
+            <p className='text-[#1A1A1A] uppercase text-[10px] font-bold'>Compliance</p>
             <div className="flex items-center space-x-2 mb-4">
               {/* Progress bar */}
-              <div className="h-1.5 flex-grow flex mt-4">
+              <div className="h-1.5 flex-grow flex mt-2 relative">
                 <div className="w-1/4 bg-red-500"></div>
                 <div className="w-1/4 bg-yellow-500"></div>
                 <div className="w-1/12 bg-black"></div>
