@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import './CompanyDetails.css';
@@ -49,7 +48,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
 
         <div>
           <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">CLAIMS RATIO</h3>
-          <p className="text-[#1B1464] text-[15px]">{claimsRatio}</p>
+          <p className="text-[#ea384c] text-[15px] font-semibold">{claimsRatio}</p>
         </div>
 
         <div>
