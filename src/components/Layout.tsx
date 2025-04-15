@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Bell, User, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import MSAmlinLogo from './MSAmlinLogo';
+import ConversationAudio from "../audio/insurance_converdation.mp3"
+
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,6 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
     React.useEffect(() => {
       setActiveTab(location.pathname);
     }, [location.pathname]);
@@ -79,14 +82,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </header>
       {/* only show this at the preparation page */}
+      <audio ref={audioRef} preload="auto" style={{ display: 'none' }}>
+        <source src={ConversationAudio} type="audio/mp3"/>
+      </audio>
+
       {activeTab === '/' && (
         <div className="py-3 shadow-sm bg-white border-t border-gray-200">
           <div className="container mx-auto px-4 flex justify-end">
-            <button 
-              onClick={() => navigate('/conversation')}
+            <Button
+              onClick={async () => {
+                try {
+                  if (audioRef.current) {
+                    // Reset audio to start
+                    audioRef.current.currentTime = 0;
+                    await audioRef.current.play();
+                  }
+                  navigate('/conversation');
+                } catch (error) {
+                  console.error('Error playing audio:', error);
+                  // Still navigate even if audio fails
+                  navigate('/conversation');
+                }
+              }}
               className="bg-[#E11F27] text-white px-8 py-2 rounded-full">
               Start Conversation
-              </button>
+            </Button>
           </div>
         </div>
       )}
