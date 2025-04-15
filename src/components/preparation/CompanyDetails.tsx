@@ -78,7 +78,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
 
         <div>
           <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">COMPLIANCE</h3>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-200 rounded-full">
             <div
               className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
               style={{ width: `100%` }}

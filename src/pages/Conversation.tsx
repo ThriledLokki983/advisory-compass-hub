@@ -169,7 +169,7 @@ const Conversation: React.FC = () => {
               <div className="h-1.5 flex-grow flex mt-2 relative">
                 <div className="w-1/4 bg-red-500"></div>
                 <div className="w-1/4 bg-yellow-500"></div>
-                <div className="w-1/12 bg-black"></div>
+                <div className="w-1/12 bg-black rounded-full h-3 w-3 absolute left-20 top-0.5 transform -translate-x-1/2 -translate-y-1/2"></div>
                 <div className="flex-grow bg-green-500"></div>
               </div>
             </div>
