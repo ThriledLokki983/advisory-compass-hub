@@ -21,7 +21,7 @@ interface AnimatedSuggestionProps {
 const AnimatedSuggestion: React.FC<AnimatedSuggestionProps> = ({ suggestion, index, onSuggestionClick, show }) => (
   <div
     className={`transition-all duration-500 ease-out transform absolute w-full ${show ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-4 opacity-0 pointer-events-none'}`}
-    style={{ top: 0 }}
+    style={{ top: `${(index + 1) * - 72}px` }}
   >
     <Button
       variant="outline"
@@ -76,8 +76,8 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
         )}
 
         {suggestions.length > 0 && (
-          <div className="mt-auto">
-            <div className="relative h-[72px]">
+          <div className="space-y-2 mt-auto">
+            <div className="relative h-auto">
               {suggestions.map((suggestion, index) => (
                 <AnimatedSuggestion
                   key={index}
