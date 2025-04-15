@@ -21,22 +21,35 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [location.pathname]);
   
   React.useEffect(() => {
-    if (!audioRef.current) return;
+    const playAudio = () => {
+      if (!audioRef.current) return;
   
-    if (location.pathname === '/conversation') {
-      const playTimeout = setTimeout(() => {
-        audioRef.current!.currentTime = 0;
-        audioRef.current!.play().catch((err) => {
+      audioRef.current.currentTime = 0;
+  
+      audioRef.current
+        .play()
+        .then(() => {
+          console.log("Audio played!");
+        })
+        .catch((err) => {
           console.warn("Autoplay failed:", err);
         });
-      }, 500);
+    };
   
-      return () => clearTimeout(playTimeout);
+    if (location.pathname === '/conversation') {
+      const timeout = setTimeout(() => {
+        // Try to defer it slightly so the DOM and React tree is fully ready
+        requestAnimationFrame(playAudio);
+      }, 300);
+  
+      return () => clearTimeout(timeout);
     } else {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
     }
-  }, [location.pathname]);
+  }, [location.pathname]); // Empty dependency array = runs only on mount
 
   const tabs = [
     { name: 'PREPARATION', path: '/' },
@@ -100,8 +113,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </header>
       {/* only show this at the preparation page */}
-      <audio ref={audioRef} preload="auto" style={{ display: 'none' }}>
-        <source src={ConversationAudio} type="audio/mp3"/>
+      <audio
+        ref={audioRef}
+        preload="auto"
+        style={{ display: 'none' }}
+      >
+        <source src={ConversationAudio} type="audio/mp3" />
       </audio>
 
       {activeTab === '/' && (
