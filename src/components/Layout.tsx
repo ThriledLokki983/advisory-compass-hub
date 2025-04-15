@@ -13,6 +13,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
+    React.useEffect(() => {
+      setActiveTab(location.pathname);
+    }, [location.pathname]);
 
   const tabs = [
     { name: 'PREPARATION', path: '/' },
@@ -79,7 +82,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {activeTab === '/' && (
         <div className="py-3 shadow-sm bg-white border-t border-gray-200">
           <div className="container mx-auto px-4 flex justify-end">
-            <button className="bg-[#E11F27] text-white px-8 py-2 rounded-full">Start Conversation</button>
+            <button 
+              onClick={() => navigate('/conversation')}
+              className="bg-[#E11F27] text-white px-8 py-2 rounded-full">
+              Start Conversation
+              </button>
           </div>
         </div>
       )}
