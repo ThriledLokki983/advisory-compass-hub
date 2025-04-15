@@ -16,9 +16,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
-    React.useEffect(() => {
-      setActiveTab(location.pathname);
-    }, [location.pathname]);
+  React.useEffect(() => {
+    setActiveTab(location.pathname);
+  }, [location.pathname]);
+  
+  React.useEffect(() => {
+    if (!audioRef.current) return;
+  
+    if (location.pathname === '/conversation') {
+      const playTimeout = setTimeout(() => {
+        audioRef.current!.currentTime = 0;
+        audioRef.current!.play().catch((err) => {
+          console.warn("Autoplay failed:", err);
+        });
+      }, 500);
+  
+      return () => clearTimeout(playTimeout);
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [location.pathname]);
 
   const tabs = [
     { name: 'PREPARATION', path: '/' },
