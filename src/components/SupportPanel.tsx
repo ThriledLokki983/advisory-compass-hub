@@ -48,7 +48,7 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
     setVisibleSuggestions(new Array(suggestions.length).fill(false));
 
     suggestions.forEach((_, index) => {
-      const delay = 3000 + (index * 3000); // 10s initial delay, then 5s between each
+      const delay = 26500 + (index * 25500); // 10s initial delay, then 5s between each
       setTimeout(() => {
         setVisibleSuggestions(prev => {
           const newState = [...prev];
