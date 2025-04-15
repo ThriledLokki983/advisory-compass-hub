@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChevronRight, Send } from 'lucide-react';
@@ -11,6 +11,30 @@ interface SupportPanelProps {
   onSuggestionClick?: (suggestion: string) => void;
 }
 
+interface AnimatedSuggestionProps {
+  suggestion: string;
+  index: number;
+  onSuggestionClick?: (suggestion: string) => void;
+  show: boolean;
+}
+
+const AnimatedSuggestion: React.FC<AnimatedSuggestionProps> = ({ suggestion, index, onSuggestionClick, show }) => (
+  <div
+    className={`transition-all duration-500 ease-out transform absolute w-full ${show ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-4 opacity-0 pointer-events-none'}`}
+    style={{ top: 0 }}
+  >
+    <Button
+      variant="outline"
+      className="w-full p-3 justify-between text-left text-[#2D2D6D] bg-white flex items-center text-wrap rounded-xl"
+      style={{ height: 'max-content' }}
+      onClick={() => onSuggestionClick && onSuggestionClick(suggestion)}
+    >
+      <span className="mr-2 font-[400]" dangerouslySetInnerHTML={{ __html: suggestion }}></span>
+      <ChevronRight className="h-4 w-4 flex-shrink-0" />
+    </Button>
+  </div>
+);
+
 const SupportPanel: React.FC<SupportPanelProps> = ({
   title = "MS Amlin support",
   insights,
@@ -18,6 +42,22 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
   onSuggestionClick,
 }) => {
   const [message, setMessage] = useState('');
+  const [visibleSuggestions, setVisibleSuggestions] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    setVisibleSuggestions(new Array(suggestions.length).fill(false));
+
+    suggestions.forEach((_, index) => {
+      const delay = 3000 + (index * 3000); // 10s initial delay, then 5s between each
+      setTimeout(() => {
+        setVisibleSuggestions(prev => {
+          const newState = [...prev];
+          newState[index] = true;
+          return newState;
+        });
+      }, delay);
+    });
+  }, [suggestions.length]);
 
   const handleSend = () => {
     if (message.trim()) {
@@ -36,19 +76,18 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
         )}
 
         {suggestions.length > 0 && (
-          <div className="space-y-2 mt-auto">
-            {suggestions.map((suggestion, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                className="w-full p-3 justify-between text-left text-[#2D2D6D] bg-white flex items-center text-wrap rounded-xl"
-                style={{ height: 'max-content' }}
-                onClick={() => onSuggestionClick && onSuggestionClick(suggestion)}
-              >
-                <span className="mr-2 font-[400]">{suggestion}</span>
-                <ChevronRight className="h-4 w-4 flex-shrink-0" />
-              </Button>
-            ))}
+          <div className="mt-auto">
+            <div className="relative h-[72px]">
+              {suggestions.map((suggestion, index) => (
+                <AnimatedSuggestion
+                  key={index}
+                  suggestion={suggestion}
+                  index={index}
+                  onSuggestionClick={onSuggestionClick}
+                  show={visibleSuggestions[index]}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

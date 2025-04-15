@@ -115,8 +115,8 @@ const supportInsights = (
 );
 
 const supportSuggestions = [
-  "List the key coverage of the equipment breakdown insurance",
-  "Create a high-level cost estimation for the policy update following the acquisition of a new machine valued at €250,000"
+  "Calculate an estimate of the new insurance premium based on the new machine of <strong>€250,000</strong>",
+  "List the key coverage for the equipment breakdown insurance"
 ];
 
 const Conversation: React.FC = () => {
