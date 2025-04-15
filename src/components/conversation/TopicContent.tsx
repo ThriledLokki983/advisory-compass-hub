@@ -37,7 +37,7 @@ const TopicContent: React.FC<TopicContentProps> = ({
         {points.map((point, index) => (
           <div key={point.id} className="relative pl-6 py-3 border-l border-gray-200">
             {/* Timeline dot */}
-            <div className="absolute left-[-4px] top-5 w-2 h-2 rounded-full border border-gray-300 bg-white"></div>
+            <div className="absolute left-[-8px] top-5 w-4 h-4 rounded-full border border-gray-300 bg-white"></div>
 
             {/* Content */}
             <p className="text-gray-800">{point.content}</p>

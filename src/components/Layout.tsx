@@ -13,9 +13,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
-    React.useEffect(() => {
-      setActiveTab(location.pathname);
-    }, [location.pathname]);
+
+  React.useEffect(() => {
+    setActiveTab(location.pathname);
+  }, [location.pathname]);
 
   const tabs = [
     { name: 'PREPARATION', path: '/' },
