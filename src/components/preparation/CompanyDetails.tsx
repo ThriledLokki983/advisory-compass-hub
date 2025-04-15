@@ -39,45 +39,45 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
 }) => {
   return (
     <div className="p-6">
-      <h2 className="text-[#1C1B1F] text-xl font-medium mb-6 text-[26px]">Company details - {name}</h2>
+      <h2 className="text-[#1B1464] text-xl font-medium mb-6 text-[26px]">Company details - {name}</h2>
 
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <h3 className="text-[#1C1B1F] font-medium mb-2 text-[16px]">NUMBER OF EMPLOYEES</h3>
-          <p className="text-[#1C1B1F] text-[15px]">{employees}</p>
+          <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">NUMBER OF EMPLOYEES</h3>
+          <p className="text-[#1B1464] text-[15px]">{employees}</p>
         </div>
 
         <div>
-          <h3 className="text-[#1C1B1F] font-medium mb-2 text-[16px]">CLAIMS RATIO</h3>
-          <p className="text-[#1C1B1F] text-[15px]">{claimsRatio}</p>
+          <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">CLAIMS RATIO</h3>
+          <p className="text-[#1B1464] text-[15px]">{claimsRatio}</p>
         </div>
 
         <div>
-          <h3 className="text-[#1C1B1F] font-medium mb-2 text-[16px]">ANNUAL PREMIUM AMOUNTS IN 2024</h3>
-          <p className="text-[#1C1B1F] text-[15px]">
+          <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">ANNUAL PREMIUM AMOUNTS IN 2024</h3>
+          <p className="text-[#1B1464] text-[15px]">
             {premiumAmount}&nbsp;
             (<span className="text-green-500 font-semibold ml-1">{premiumChange}</span>)
           </p>
         </div>
 
         <div>
-          <h3 className="text-[#1C1B1F] font-medium mb-2 text-[16px]">REVENUE</h3>
-          <p className="text-[#1C1B1F] text-[15px]">
+          <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">REVENUE</h3>
+          <p className="text-[#1B1464] text-[15px]">
             {revenue}&nbsp;
             (<span className="text-green-500 font-semibold ml-1">{revenueChange}</span>)
           </p>
         </div>
 
         <div>
-          <h3 className="text-[#1C1B1F] font-medium mb-2 text-[16px]">NUMBER OF CLAIMS IN 2024</h3>
-          <p className="text-[#1C1B1F] text-[15px]">
+          <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">NUMBER OF CLAIMS IN 2024</h3>
+          <p className="text-[#1B1464] text-[15px]">
             {claims}&nbsp;
             (<span className="text-red-500 font-semibold ml-1">{claimsChange}</span>)
           </p>
         </div>
 
         <div>
-          <h3 className="text-[#1C1B1F] font-medium mb-2 text-[16px]">COMPLIANCE</h3>
+          <h3 className="text-[#1B1464] font-medium mb-2 text-[16px]">COMPLIANCE</h3>
           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
