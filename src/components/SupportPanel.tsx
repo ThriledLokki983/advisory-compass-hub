@@ -30,7 +30,7 @@ const AnimatedSuggestion: React.FC<AnimatedSuggestionProps> = ({ suggestion, ind
     onClick={() => onSuggestionClick && onSuggestionClick(suggestion)}
     >
       <div className="flex flex-col">
-        <p className="text-[12px] uppercase pb-2 leading-none">&rarr; Prompt suggestion</p>
+        <p className="text-[12px] uppercase pb-2 leading-none font-[600]">&rarr; Prompt suggestion</p>
         <p className="mr-2 font-[400]" dangerouslySetInnerHTML={{ __html: suggestion }} />
       </div>
       <ChevronRight className="h-4 w-4 flex-shrink-0 mt-1" />
@@ -68,9 +68,9 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
       { time: 62000, text: 'Freddie: send invoice of the new machine within three days', type: 'action' },
       { time: 70000, text: 'Agnes: adjust policy fire insurance, calculate new premium', type: 'action' },
     ];
-  
+
     setVisibleSuggestions([]); // reset
-  
+
     timeline.forEach(({ time, text, type }) => {
       setTimeout(() => {
         setVisibleSuggestions(prev => [...prev, { text, type }]);
@@ -87,33 +87,35 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
       { time: 61500, text: 'Action point detected' },
       { time: 69500, text: 'Action point detected' },
     ];
-  
+
     const timers: NodeJS.Timeout[] = [];
-  
-    events.forEach(({ time, text }) => {
+
+    events.forEach(({ time, text }, index) => {
       timers.push(setTimeout(() => {
         setAiStatusText(text);
         setAiIsActive(true); // trigger blue flash
       }, time));
-  
+
       timers.push(setTimeout(() => {
         setAiIsActive(false); // remove blue
-        setAiStatusText('AI is listening');
+        setTimeout(() => {
+          setAiStatusText(index === events.length - 1 ? 'Conversation has ended' : 'AI is listening');
+        }, index === events.length - 1 ? 7500 : 0);
       }, time + 800));
     });
-  
+
     return () => timers.forEach(clearTimeout);
   }, []);
 
   const handleSend = () => {
     if (message.trim()) {
       console.log('Sending message:', message);
-      
+
       toast({
         title: "Message sent",
         description: `"${message.substring(0, 30)}${message.length > 30 ? '...' : ''}" has been sent to MS Amlin support.`
       });
-      
+
       setMessage('');
     }
   };
@@ -141,7 +143,7 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
               key={index}
               className="mt-4 px-3 py-2 text-sm text-[#1B1464] bg-[#F3F3F3] border border-[#E0E0E0] rounded-tl-xl rounded-tr-xl rounded-br-xl w-[80%]"
             >
-              <p className='text-[12px] uppercase pb-1'>○ Action point</p>
+              <p className='text-[12px] uppercase pb-1 font-[600]'>○ Action point</p>
               {item.text}
             </div>
           )
