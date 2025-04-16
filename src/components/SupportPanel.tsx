@@ -141,7 +141,7 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
           ) : (
             <div
               key={index}
-              className="mt-4 px-3 py-2 text-sm text-[#1B1464] bg-[#F3F3F3] border border-[#E0E0E0] rounded-tl-xl rounded-tr-xl rounded-br-xl w-[80%]"
+              className="mt-4 px-3 py-2 text-sm text-[#101010] bg-[#F3F3F3] border border-[#E0E0E0] rounded-tl-xl rounded-tr-xl rounded-br-xl w-[80%]"
             >
               <p className='text-[12px] uppercase pb-1 font-[600]'>○ Action point</p>
               {item.text}
@@ -155,7 +155,7 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
       <div className={`flex items-center flex-row mb-1 transition-all duration-500 ease-in-out
         ${aiIsActive ? 'bg-blue-100 text-blue-800 px-2 py-1 rounded-md' : 'text-gray-500 px-2 py-1'}
       `}>
-        <span className="loader mr-1"></span>
+        {aiStatusText !== 'Conversation has ended' ? <span className="loader mr-1"></span> : null}
         <span className={`text-xs transition-opacity duration-500 ease-in-out ${aiIsActive ? 'opacity-100' : 'opacity-70'}`}>
           {aiStatusText}
         </span>
