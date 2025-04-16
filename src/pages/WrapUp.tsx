@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import WrapUpTabs from '@/components/wrapup/WrapUpTabs';
@@ -6,7 +5,7 @@ import SummaryContent from '@/components/wrapup/SummaryContent';
 import ActionPoints from '@/components/wrapup/ActionPoints';
 import LearningPoints from '@/components/wrapup/LearningPoints';
 import Sources from '@/components/wrapup/Sources';
-import { toast } from "sonner";
+import { toast } from "@/hooks/use-toast";
 
 // Mock data
 const summaryContent = `
@@ -143,19 +142,22 @@ const WrapUp: React.FC = () => {
   const tabs = ['Summary', 'Action points', 'Learning points'];
 
   const handleEdit = () => {
-    toast.info("Edit mode enabled", {
+    toast({
+      title: "Edit mode enabled",
       description: "You can now edit the content."
     });
   };
 
   const handleShare = () => {
-    toast.success("Content shared", {
-      description: "The content has been shared with the client."
+    toast({
+      title: "Content shared",
+      description: "The content has been shared with Farm Frites."
     });
   };
 
   const handleOpenKnowledgeCenter = () => {
-    toast.info("Knowledge center", {
+    toast({
+      title: "Knowledge center",
       description: "Opening knowledge center..."
     });
   };
@@ -166,6 +168,8 @@ const WrapUp: React.FC = () => {
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={setActiveTab}
+        onEditSummary={handleEdit}
+        onShare={handleShare}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">

@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChevronRight, Send } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 interface SupportPanelProps {
   title?: string;
@@ -108,6 +108,12 @@ const SupportPanel: React.FC<SupportPanelProps> = ({
   const handleSend = () => {
     if (message.trim()) {
       console.log('Sending message:', message);
+      
+      toast({
+        title: "Message sent",
+        description: `"${message.substring(0, 30)}${message.length > 30 ? '...' : ''}" has been sent to MS Amlin support.`
+      });
+      
       setMessage('');
     }
   };
